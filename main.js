@@ -11,6 +11,7 @@ let defaultUser = {
 const button1 = document.getElementById("button1");
 const upgradeButton1 = document.getElementById("upgradeButton1");
 const upgradeButton2 = document.getElementById("upgradeButton2");
+const resetButton = document.getElementById("resetButton")
 const pointText = document.getElementById("pointText");
 const upgradeText = document.getElementById("upgradeText");
 const upgradeText2 = document.getElementById("upgradeText2");
@@ -36,6 +37,12 @@ function updateText() {
   upgradeText2.textContent = "Cost: " + user.cost2;
   pointText.textContent = "Point: " + user.point;
 };
+
+resetButton.addEventListener("click", () => {
+  localStorage.removeItem("userData");
+  user = { ...defaultUser };
+  updateText()
+});
 
 button1.addEventListener("click", () => {
   user.point += clickPower();

@@ -48,3 +48,22 @@
 #button1:hover:active {
     background-color: #f55;
 }
+
+#resetButton {
+    font-size: 12px;
+    width: 120px;
+    height: 60px;
+    background: crimson;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border-width: 5px;
+    border-color: black;
+    border-radius: 10px;
+}
+
+#version {
+    position: absolute;
+    bottom: 10px;
+    left:  10px;
+}
