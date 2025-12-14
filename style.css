@@ -1,0 +1,50 @@
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.textDisplay {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+}
+
+#button1 {
+    font-size: 30px;
+    width: 160px;
+    height: 90px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: red;
+    border-width: 6px;
+    border-color: #500;
+}
+
+#upgradeButton1 {
+    width: 120px;
+    height: 60px;
+    background-color: #7f7;
+    border-width: 4px;
+    border-color: #0a0;
+}
+
+#upgradeButton2 {
+    width: 150px;
+    height: 60px;
+    background-color: #4e4;
+    border-width: 4px;
+    border-color: #070;
+}
+
+#randomBackground {
+    width: 150px;
+    height: 60px;
+    border-width: 5px;
+}
+
+
+#button1:hover:active {
+    background-color: #f55;
+}
