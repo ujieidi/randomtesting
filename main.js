@@ -42,9 +42,9 @@ function clickPower() {
 }
 
 function updateText() {
-  upgradeText.textContent = "Cost: " + user.cost;
-  upgradeText2.textContent = "Cost: " + user.cost2;
-  pointText.textContent = "Point: " + user.point;
+  upgradeText.querySelector("span").textContent = user.cost;
+  upgradeText2.querySelector("span").textContent = user.cost2;
+  pointText.querySelector("span").textContent = user.point;
 };
 
 resetButton.addEventListener("click", () => {
