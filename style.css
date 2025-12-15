@@ -5,7 +5,23 @@ body {
     -ms-user-select: none;
 }
 
+button {
+    font-size: clamp(10px, 1.2vw, 20px);
+}
+
 .buttonContainer {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.leftButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.rightButtons {
     display: flex;
     gap: 10px;
 }
@@ -17,7 +33,7 @@ body {
 }
 
 #button1 {
-    font-size: 12px;
+    font-size: 18px;
     width: 160px;
     height: 90px;
     position: absolute;
@@ -61,9 +77,6 @@ body {
     width: 120px;
     height: 60px;
     background: crimson;
-    position: absolute;
-    top: 10px;
-    right: 10px;
     border-width: 5px;
     border-color: black;
     border-radius: 10px;
@@ -72,5 +85,5 @@ body {
 #version {
     position: absolute;
     bottom: 10px;
-    left:  10px;
+    left: 10px;
 }
