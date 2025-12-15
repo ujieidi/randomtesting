@@ -44,6 +44,7 @@ button {
     word-break: break-word;
     text-align: center;
     padding: 10px 10px;
+    cursor: pointer;
 }
 
 .buttonContainer {
