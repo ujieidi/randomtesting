@@ -23,11 +23,12 @@ body {
 
 .menu-items button {
     height: 3rem;
-    font-size: clamp(12px, 2vw, 30px);
+    font-size: clamp(12px, 2vw, 24px);
     min-width: 80px;
     font-style: italic;
     background: #cdf;
     letter-spacing: 2px;
+    cursor: pointer;
 }
 
 #title {
@@ -36,7 +37,7 @@ body {
 }
 
 button {
-    font-size: clamp(10px, 1.2vw, 20px);
+    font-size: clamp(10px, 1.2vw, 18px);
     min-width: 80px;
     max-width: 200px;
     white-space: normal;
