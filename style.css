@@ -6,6 +6,23 @@ body {
     overflow: hidden;
 }
 
+button {
+    -webkit-appearance: none;
+    appearance: none;
+    color: black;
+    border-style: solid;
+    
+    touch-action: manipulation;
+
+    font-size: clamp(10px, 1.2vw, 18px);
+    min-width: 80px;
+    max-width: 240px;
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+}
 
 #menu {
     display: flex;
@@ -28,23 +45,11 @@ body {
     font-style: italic;
     background: #cdf;
     letter-spacing: 2px;
-    cursor: pointer;
 }
 
 #title {
     font-size: clamp(25px, 4vw, 80px);
     margin-bottom: 20px;
-}
-
-button {
-    font-size: clamp(10px, 1.2vw, 18px);
-    min-width: 80px;
-    max-width: 240px;
-    white-space: normal;
-    word-break: break-word;
-    text-align: center;
-    padding: 10px 10px;
-    cursor: pointer;
 }
 
 .buttonContainer {
@@ -68,6 +73,7 @@ button {
     display: flex;
     gap: 10px;
     font-size: 13px;
+    color: black;
 }
 
 #button1 {
@@ -100,8 +106,8 @@ button {
 #randomBackground {
     height: 60px;
     border-width: 5px;
+    border-color: black;
 }
-
 
 #button1:hover:active {
     background-color: #f55;
@@ -120,4 +126,5 @@ button {
     position: absolute;
     bottom: 10px;
     left: 10px;
+    color: black;
 }
