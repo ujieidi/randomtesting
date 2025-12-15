@@ -15,28 +15,47 @@
 
 <body>
   
-<div class="buttonContainer">
-  <div class="leftButtons">
-    <button id="button1"> Click For Points </button>
-    <button id="upgradeButton1"> Increase Clickpower by 1 </button>
-    <button id="upgradeButton2"> Multiply Clickpower by 2x </button>
-    <button id="randomBackground"> Random Background </button>
+  <div id="menu" style="display: flex;">
+    <h1 id="title">ULTIMATE CLICKER GAME</h1>
+    <div class="menu-items">
+      <button id="settings">COMING SOON</button>
+      <button id="play">Start</button>
+      <button id="credits">COMING SOON</button>
+    </div>
   </div>
-  <div class="rightButtons">
-  <button id="resetButton"> DELETE DATA PERNAMENTLY</button>
+  
+<div id="mainGame" style="display:  none;">
+  
+   <div class="buttonContainer">
+     
+    <div class="leftButtons">
+      
+     <button id="button1"> Click For Points </button>
+      <button id="upgradeButton1"> Increase Clickpower by 1 </button>
+      <button id="upgradeButton2"> Multiply Clickpower by 2 </button>
+     <button id="randomBackground"> Random Background </button>
+     
+    </div>
+    
+    <div class="rightButtons">
+      
+      <button id="resetButton"> DELETE DATA PERNAMENTLY</button>
+      
+    </div>
+  
+  </div>
+
+  <div class="textDisplay">
+
+    <h1 id="upgradeText"> Cost: 0</h1>
+    <h1 id="upgradeText2"> Cost : 0</h1>
+    <h1 id="pointText"> Points: 0</h1>
+  
   </div>
   
 </div>
 
-<div class="textDisplay">
-
-  <h1 id="upgradeText"> Cost: 0</h1>
-  <h1 id="upgradeText2"> Cost : 0</h1>
-  <h1 id="pointText"> Points: 0</h1>
-  
-</div>
-
-<h4 id="version"> v0.1 </h4>
+<h4 id="version"> v0.2 </h4>
 
   <script src="main.js"></script>
 </body>
