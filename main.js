@@ -6,11 +6,13 @@ let defaultUser = {
   clickMulti: 1,
   cost: 10,
   cost2: 100,
+  bgColor: "#ffffff"
 };
 
 const menu = document.getElementById("menu");
 const mainGame = document.getElementById("mainGame");
 const playButton = document.getElementById("play");
+const returnMenu = document.getElementById("returnMenu");
 const button1 = document.getElementById("button1");
 const upgradeButton1 = document.getElementById("upgradeButton1");
 const upgradeButton2 = document.getElementById("upgradeButton2");
@@ -18,12 +20,30 @@ const resetButton = document.getElementById("resetButton")
 const pointText = document.getElementById("pointText");
 const upgradeText = document.getElementById("upgradeText");
 const upgradeText2 = document.getElementById("upgradeText2");
-const rngBG = document.getElementById("randomBackground");
+const colorBtn = document.getElementById("colorBtn");
+const colorPicker = document.getElementById("colorPicker");
+
+colorBtn.addEventListener("click", () => {
+  colorPicker.click();
+});
+
+colorPicker.addEventListener("input", () => {
+  user.bgColor = colorPicker.value;
+  document.body.style.backgroundColor = user.bgColor;
+  saveData();
+});
+
 
 playButton.addEventListener("click", () => {
   menu.style.display = "none";
   mainGame.style.display = "block";
   console.log("switched from menu to game screen")
+})
+
+returnMenu.addEventListener("click", () => {
+  menu.style.display = "flex";
+  mainGame.style.display = "none";
+  console.log("switched from game to menu screen")
 })
 
 function saveData() {
@@ -52,6 +72,8 @@ resetButton.addEventListener("click", () => {
   if (userConfirmed) {
   localStorage.removeItem("userData");
   user = { ...defaultUser };
+  document.body.style.backgroundColor = defaultUser.bgColor;
+  colorPicker.value = defaultUser.bgColor;
   updateText()
   console.log("resetted")
   }
@@ -89,18 +111,13 @@ upgradeButton2.addEventListener("click", () => {
   }
 })
 
-function randomBG() {
-  const r = Math.floor(Math.random() * 256);
-  const g = Math.floor(Math.random() * 256);
-  const b = Math.floor(Math.random() * 256);
-  
-  document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-  rngBG.style.backgroundColor = `rgb(${255 - r}, ${255 - g}, ${255 - b})`;
-};
+loadData();
 
-rngBG.addEventListener("click", randomBG);
+if (user.bgColor) {
+  document.body.style.backgroundColor = user.bgColor;
+  colorPicker.value = user.bgColor;
+}
 
-loadData()
 setInterval(() => {
   updateText()
 }, 50)
