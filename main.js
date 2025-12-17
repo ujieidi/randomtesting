@@ -23,9 +23,27 @@ const upgradeText2 = document.getElementById("upgradeText2");
 const colorBtn = document.getElementById("colorBtn");
 const colorPicker = document.getElementById("colorPicker");
 
-colorBtn.addEventListener("click", () => {
-  colorPicker.click();
-});
+function supportsColorInput() {
+  const i = document.createElement("input");
+  i.type = "color";
+  return i.type === "color";
+}
+
+const presetColors = ["#ffffff", "#fef3f3", "#e6ffe6", "#f3f3ff", "#fff7e6", "#222222"];
+let colorIndex = 0;
+
+if (supportsColorInput()) {
+  colorBtn.addEventListener("click", () => {
+    colorPicker.click();
+  });
+} else {
+  colorBtn.addEventListener("click", () => {
+    colorIndex = (colorIndex + 1) % presetColors.length;
+    user.bgColor = presetColors[colorIndex];
+    document.body.style.backgroundColor = user.bgColor;
+    saveData();
+  });
+}
 
 colorPicker.addEventListener("input", () => {
   user.bgColor = colorPicker.value;
@@ -54,28 +72,39 @@ function loadData() {
   const savedData = JSON.parse(localStorage.getItem("userData")) || {};
   if (savedData) {
     user = { ...defaultUser, ...savedData };
-  };
+  } else {
+    user = { ...defaultUser };
+  }
 };
+
+function formatNum(n) {
+  if (typeof n !== "number") return n;
+  if (n >= 1e12) return (n / 1e12).toFixed(2) + "T";
+  if (n >= 1e9) return (n / 1e9).toFixed(2) + "B";
+  if (n >= 1e6) return (n / 1e6).toFixed(2) + "M";
+  if (n >= 1e3) return (n / 1e3).toFixed(2) + "K";
+  return n;
+}
 
 function clickPower() {
   return user.clickBase * user.clickMulti;
 }
 
 function updateText() {
-  upgradeText.querySelector("span").textContent = user.cost;
-  upgradeText2.querySelector("span").textContent = user.cost2;
-  pointText.querySelector("span").textContent = user.point;
+  upgradeText.querySelector("span").textContent = formatNum(user.cost);
+  upgradeText2.querySelector("span").textContent = formatNum(user.cost2);
+  pointText.querySelector("span").textContent = formatNum(user.point);
 };
 
 resetButton.addEventListener("click", () => {
   const userConfirmed = confirm("Are you sure to delete the data")
   if (userConfirmed) {
-  localStorage.removeItem("userData");
-  user = { ...defaultUser };
-  document.body.style.backgroundColor = defaultUser.bgColor;
-  colorPicker.value = defaultUser.bgColor;
-  updateText()
-  console.log("resetted")
+    localStorage.removeItem("userData");
+    user = { ...defaultUser };
+    document.body.style.backgroundColor = defaultUser.bgColor;
+    colorPicker.value = defaultUser.bgColor;
+    updateText()
+    console.log("resetted")
   }
   else {
     console.log("cancelled")
@@ -111,38 +140,57 @@ upgradeButton2.addEventListener("click", () => {
   }
 })
 
+function organizeUpgradeUI() {
+  try {
+    const pairs = [
+      { btn: upgradeButton1, costEl: upgradeText },
+      { btn: upgradeButton2, costEl: upgradeText2 }
+    ];
+    
+    pairs.forEach(({ btn, costEl }) => {
+      if (!btn || !costEl) return;
+      
+      if (btn.parentElement && btn.parentElement.classList.contains("upgrade")) return;
+      
+      const wrapper = document.createElement("div");
+      wrapper.className = "upgrade";
+      
+      btn.parentNode.insertBefore(wrapper, btn);
+      wrapper.appendChild(btn);
+      wrapper.appendChild(costEl);
+    });
+  } catch (err) {
+    console.warn("organizeUpgradeUI failed:", err);
+  }
+}
+
 document.addEventListener("click", (e) => {
   const btn = e.target.closest("button");
-  if (!btn) return; // clicked something else, ignore
-
-  const rect = btn.getBoundingClientRect();
-
-  // get click position
+  if (!btn) return;
+  
   const x = e.clientX;
   const y = e.clientY;
-
-  // grab button background color
+  
   const btnColor = getComputedStyle(btn).backgroundColor;
-
+  
   const particleCount = 8;
-
+  
   for (let i = 0; i < particleCount; i++) {
     const p = document.createElement("div");
     p.className = "particle";
     
     p.style.filter = "brightness(1.8)";
-
-    // random burst direction
+    
     const offsetX = (Math.random() - 0.5) * 160 + "px";
     const offsetY = (Math.random() - 0.5) * 160 + "px";
-
+    
     p.style.setProperty("--x", offsetX);
     p.style.setProperty("--y", offsetY);
     p.style.setProperty("--pColor", btnColor);
-
+    
     p.style.left = x + "px";
     p.style.top = y + "px";
-
+    
     document.body.appendChild(p);
     p.addEventListener("animationend", () => p.remove());
   }
@@ -150,9 +198,11 @@ document.addEventListener("click", (e) => {
 
 loadData();
 
+organizeUpgradeUI();
+
 if (user.bgColor) {
   document.body.style.backgroundColor = user.bgColor;
-  colorPicker.value = user.bgColor;
+  try { colorPicker.value = user.bgColor; } catch (e) {}
 }
 
 setInterval(() => {
