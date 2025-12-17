@@ -111,6 +111,43 @@ upgradeButton2.addEventListener("click", () => {
   }
 })
 
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return; // clicked something else, ignore
+
+  const rect = btn.getBoundingClientRect();
+
+  // get click position
+  const x = e.clientX;
+  const y = e.clientY;
+
+  // grab button background color
+  const btnColor = getComputedStyle(btn).backgroundColor;
+
+  const particleCount = 8;
+
+  for (let i = 0; i < particleCount; i++) {
+    const p = document.createElement("div");
+    p.className = "particle";
+    
+    p.style.filter = "brightness(1.8)";
+
+    // random burst direction
+    const offsetX = (Math.random() - 0.5) * 160 + "px";
+    const offsetY = (Math.random() - 0.5) * 160 + "px";
+
+    p.style.setProperty("--x", offsetX);
+    p.style.setProperty("--y", offsetY);
+    p.style.setProperty("--pColor", btnColor);
+
+    p.style.left = x + "px";
+    p.style.top = y + "px";
+
+    document.body.appendChild(p);
+    p.addEventListener("animationend", () => p.remove());
+  }
+});
+
 loadData();
 
 if (user.bgColor) {
